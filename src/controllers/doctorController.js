@@ -34,6 +34,7 @@ let postInfoDoctor = async (req, res) => {
 
         return res.status(200).json(response);
     } catch (error) {
+        hj
         console.log(error);
         res.status(200).json({
             errCode: -1,

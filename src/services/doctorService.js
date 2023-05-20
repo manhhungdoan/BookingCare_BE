@@ -19,6 +19,7 @@ let getTopDoctorHome = (limit) => {
                 include: [
                     { model: db.Allcode, as: 'positionData', attributes: ['valueEn', 'valueVi'] },
                     { model: db.Allcode, as: 'genderData', attributes: ['valueEn', 'valueVi'] },
+                    // { model: db.Clinic, as: 'specialtyData', attributes: ['name'] },
                 ],
                 raw: true,
                 nest: true,
@@ -229,7 +230,7 @@ let bulkCreateSchedule = (data) => {
 
                 // get all existing data
                 let existing = await db.Schedule.findAll({
-                    where: { doctorId: data.doctorId, date:''+ data.formattedDate },
+                    where: { doctorId: data.doctorId, date: '' + data.formattedDate },
                     attributes: ['timeType', 'date', 'doctorId', 'maxNumber'],
                     raw: true,
                 });
@@ -383,7 +384,7 @@ let getListPatientForDoctor = (doctorId, date) => {
             } else {
                 let data = await db.Booking.findAll({
                     where: {
-                        statusId: 'S2',
+                        // statusId: 'S2',
                         doctorId: doctorId,
                         date: date,
                     },

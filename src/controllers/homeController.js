@@ -1,5 +1,6 @@
 import db from '../models/index';
 import CRUDService from '../services/CRUDService';
+import homeServices from '../services/homeServices'
 
 let getHomePage = async (req, res) => {
     try {
@@ -12,6 +13,19 @@ let getHomePage = async (req, res) => {
     }
 };
 
+let postSearchHome = async (req, res) => {
+    let keyword = req.query.keyword;
+    try {
+        let result = await homeServices.postSearchHomePage(keyword)
+        return res.status(200).json(result);
+    } catch (e) {
+        console.log(e);
+        res.status(200).json({
+            errCode: -1,
+            errMessage: e,
+        });
+    }
+};
 let getCRUD = (req, res) => {
     return res.render('crud.ejs');
 };
@@ -67,4 +81,5 @@ module.exports = {
     getEditCRUD,
     putCRUD,
     deleteCRUD,
+    postSearchHome,
 };
